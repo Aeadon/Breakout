@@ -75,6 +75,10 @@ public class Ball extends Entity{
 		}else if(this.getY() <= 0){
 			yDir *= -1;
 		}
+		/*
+		 * Various sanity checks for speed and angle to keep the game
+		 * manageable.
+		 */
 		if(xDir > maxXDir){
 			xDir = maxXDir;
 		}
@@ -89,7 +93,10 @@ public class Ball extends Entity{
 		incrementPosition();
 		//TODO Figure out what to do with this lastUpdateTime
 	}
-	
+	/**
+	 * 
+	 * @return True if the ball is completely in the screen.
+	 */
 	public boolean inBounds(){
 		if(this.getX() > 0 && this.getY() > 0 && this.getX() + shape.getWidth() < screenWidth &&
 				this.getY() + shape.getHeight() < screenHeight){
@@ -97,6 +104,13 @@ public class Ball extends Entity{
 		}
 		return false;
 	}
+	/**
+	 * Checks if coordinates provided are within the screen. Will
+	 * likely be relocated to a utility class or to <Code>Entity</Code>.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	private boolean inBounds(float x, float y){
 		if(x >= 0 && x <= screenWidth && y >= 0 && y <= screenHeight){
 			return true;
